@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <title>닌텐도 스위치 동물의 숲 에디션</title>
+
+        <style>
+            * {
+                font-family: 'Noto Sans KR', sans-serif;
+            }
+
+            .wrap {
+                width: 500px;
+                margin: auto;
+            }
+
+            .image {
+                width: 450px;
+                height: 300px;
+                background-image: url("https://image2.lotteimall.com/goods/98/04/83/1534830498_L.jpg");
+                background-position: center;
+                background-size: cover;
+            }
+
+            .info {
+                width: 450px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .order {
+                width: 450px;
+            }
+
+            .mybtn {
+                margin: auto;
+                display: block;
+            }
+
+            .rate {
+                color: blue;
+            }
+        </style>
+
+        <script>
+
+            $(document).ready(function () {
+                $.ajax({
+  type: "GET",
+  url: "https://api.manana.kr/exchange/rate.json",
+  data: {},
+  success: function(response){
+      let nowRate = response[1]['rate']
+      $('#rate-box').text(nowRate)
+
+  }
+})
+            });
+
+            function order() {
+                let name = $('#order-name').val();
+                let count = $('#order-count').val();
+                let adress = $('#order-adress').val();
+                let phone = $('#order-phone').val();
+
+                if (name == '') {
+                    alert('이름을 입력하세요');
+                } else if (count == '-- 수량을 선택하세요 --') {
+                    alert('수량을 입력하세요');
+                } else if (adress == '') {
+                    alert('주소를 입력하세요');
+                } else if (phone == '') {
+                    alert('전화번호를 입력하세요');
+                } else {
+                    alert('주문이 완료되었습니다!')
+                }
+
+            }
+
+        </script>
+
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="image"></div>
+            <div class="info">
+                <h3>Nintendo Switch 모여봐요 동물의 숲 에디션</h3>
+                <h5>가격: 360,000원</h5>
+                <p>남들은 다 샀다는데 일단 나는 없는 환상의 Nintendo Switch 모여봐요 동물의 숲 에디션</p>
+
+                <p class="rate">달러-원 환율: <span id="rate-box">1,000</span></p>
+
+            </div>
+            <div class="order">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">주문자 이름</span>
+                    </div>
+                    <input id="order-name" type="text" class="form-control" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                    </div>
+                    <select id="order-count" class="custom-select">
+                        <option selected> -- 수량을 선택하세요 --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">주소</span>
+                    </div>
+                    <input id="order-adress" type="text" class="form-control" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">전화번호</span>
+                    </div>
+                    <input id="order-phone" type="text" class="form-control" aria-describedby="basic-addon3">
+                </div>
+                <button onclick="order()" type="button" class="btn btn-primary mybtn">주문하기</button>
+            </div>
+        </div>
+    </body>
+</html>
